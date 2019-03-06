@@ -1,26 +1,47 @@
 $(document).ready(function() {
             $('#onlyMalesFilter').click(function(){
-                console.log('onlyMalesFilter Filter executed');
+                //console.log('onlyMalesFilter Filter executed');
+                employeesRef.where("gender", "==", "Male")
+                .onSnapshot(function(querySnapshot) {
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#fullTimeFilter').click(function(){
-                console.log('fullTimeFilter Filter executed');
+                employeesRef.where("isFullTime", "==", true)
+                .onSnapshot(function(querySnapshot) {
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#olderThenFilter').click(function(){
-                console.log('olderThenFilter Filter executed');
+                employeesRef.where("age", ">=", 30)
+                .onSnapshot(function(querySnapshot) {
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#ageBetweenFilter').click(function(){
-                console.log('ageBetweenFilter Filter executed');
+                employeesRef.where("age", ">=", 35)
+                .where("age", "<=", 50)
+                .onSnapshot(function(querySnapshot) {
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#yearsOfExperienceFilter').click(function(){
-                console.log('yearsOfExperienceFilter Filter executed');
+                employeesRef.where("gender", "==", "Female")
+                employeesRef.where("yearsOfExperience", ">=", 5)
+                .where("yearsOfExperience", "<=", 10)
+                .onSnapshot(function(querySnapshot) {
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#clearFilter').click(function(){
-                console.log('clearFilter Filter executed');
+                employeesRef.get().then(function(querySnapshot) {
+                    LoadTableData(querySnapshot);
+                });
             });
 });
 
