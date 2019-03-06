@@ -39,10 +39,19 @@ $(document).ready(function() {
             });
 
             $('#clearFilter').click(function(){
-                employeesRef.get().then(function(querySnapshot) {
+                employeesRef.orderBy("fName").limit(10).get().then(function(querySnapshot) {
                     LoadTableData(querySnapshot);
                 });
             });
+
+
+            $("#searchEmployee" ).change(function() {
+                var searchValue = $(this).val();
+                employeesRef.where("fName", "==", searchValue)
+                    .onSnapshot(function(querySnapshot) {
+                        LoadTableData(querySnapshot);
+                    });
+              });
 });
 
 db.collection("employees").onSnapshot(function(snapShot) {
